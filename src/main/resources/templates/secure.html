@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Secure</title>
+    <div th:replace="base :: headerfg"></div>
+</head>
+<body>
+<div th:replace="base :: navlinksfg"></div>
+<h1>Secure Page</h1>
+<h4>Name: </h4>
+<p>[[${user.firstName}]] [[${user.lastName}]]</p>
+<br/>
+<h4>Email:</h4>
+<p>[[${user.email}]]</p>
+
+<div th:replace="base :: footerfg"></div>
+</body>
+</html>
