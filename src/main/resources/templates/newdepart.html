@@ -3,18 +3,17 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Secure</title>
+    <title>Admin</title>
     <div th:replace="base :: headerfg"></div>
 </head>
 <body>
 <div th:replace="base :: navlinksfg"></div>
-<h1>Secure Page</h1>
-<h4>Name: </h4>
-<p>[[${employee.firstName}]] [[${employee.lastName}]]</p>
-<br/>
-<h4>Email:</h4>
-<p>[[${employee.email}]]</p>
-
+<h2>New Department</h2>
+<form th:action="@{/processDepart}" method="post" th:object="${department}">
+    <input type="hidden" th:field="*{id}"/>
+    Department Name: <input type="text" th:field="*{name}"/>
+    <input type="submit" value="Create"/>
+</form>
 <div th:replace="base :: footerfg"></div>
 </body>
 </html>

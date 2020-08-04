@@ -7,8 +7,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="user_table")
-public class User {
+@Table(name="employee_table")
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -33,15 +33,22 @@ public class User {
     @Column (name="enabled")
     private boolean enabled;
 
-    public User() {
+    @Column (name="job_title")
+    private String jobTitle;
+
+    @ManyToOne
+    private Department department;
+
+
+    public Employee() {
     }
 
-    public User(@Size(min = 3) String username,
-                @NotEmpty String email,
-                String password,
-                String firstName,
-                String lastName,
-                boolean enabled) {
+    public Employee(@Size(min = 3) String username,
+                    @NotEmpty String email,
+                    String password,
+                    String firstName,
+                    String lastName,
+                    boolean enabled) {
         this.username = username;
         this.email = email;
         this.setPassword(password);
@@ -106,5 +113,25 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public void clearPassword(){
+        this.password="";
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

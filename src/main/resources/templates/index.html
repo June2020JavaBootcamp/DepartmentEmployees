@@ -9,15 +9,12 @@
 <body>
 <div th:replace="base :: navlinksfg"></div>
 <h1>Index Page</h1>
-Logged user: <span sec:authentication="name"></span>
+<p th:if="${message}" >[[${message}]]</p>
+<br/><br/>
+Logged employee: <span sec:authentication="name"></span>
 <br/>
 Roles: <span sec:authentication="principal.authorities"></span>
-
-<!--<a th:href="@{/admin}">Admin Page</a>-->
-
-<!--<form th:action="@{/logout}" method="post">-->
-<!--    <input type="submit" value="Logout">-->
-<!--</form>-->
+<br/>
 <div th:replace="base :: footerfg"></div>
 </body>
 </html>

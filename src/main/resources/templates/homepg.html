@@ -8,16 +8,16 @@
 </head>
 <body>
 <div th:replace="base :: navlinksfg"></div>
-<h1>Welcome</h1>
-<div sec:authorize="isAuthenticated()">
-    This content is only shown to authenticated users.
-</div>
-<div sec:authorize="hasRole('ROLE_ADMIN')">
-    This content is only shown to administrators.
-</div>
-<div sec:authorize="hasRole('ROLE_USER')">
-    This content is only shown to users.
-</div>
+<h1>All Departments</h1>
+<table>
+    <tbody>
+    <tr th:each="department : ${departments}">
+        <td>[[${department.name}]]</td>
+        <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/updateDepart/{id}(id=${department.id})}">Update</a></td>
+        <td><a sec:authorize="isAuthenticated()" th:href="@{/showDepart/{id}(id=${department.id})}">Show</a></td>
+    </tr>
+    </tbody>
+</table>
 
 <div th:replace="base :: footerfg"></div>
 </body>

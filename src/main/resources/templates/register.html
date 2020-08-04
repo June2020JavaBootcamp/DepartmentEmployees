@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <div th:replace="base :: headerfg"></div>
+</head>
+<body>
+<div th:replace="base :: navlinksfg"></div>
+<h4>New User Registration</h4>
+<form autocomplete="off" th:action="@{/processregister}"
+      method="post" th:object="${employee}">
+    <input type="hidden" th:field="*{id}"/>
+    First Name: <input type="text" placeholder="First Name"
+                       th:field="*{firstName}" />
+    <mark>
+        <strong>
+            <span th:if="${#fields.hasErrors('firstName')}"
+                  th:errors="*{firstName}"></span>
+        </strong>
+    </mark>
+    <br/>
+    Last Name: <input type="text" placeholder="Last Name"
+                      th:field="*{lastName}" />
+    <mark>
+        <strong>
+            <span th:if="${#fields.hasErrors('lastName')}"
+                  th:errors="*{lastName}"></span>
+        </strong>
+    </mark>
+    <br/>
+    Email: <input type="email" placeholder="email@domain.com"
+                  th:field="*{email}" />
+    <mark>
+        <strong>
+            <span th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}"></span>
+        </strong>
+    </mark>
+    <br/>
+    Username: <input type="text" placeholder="Username"
+                     th:field="*{username}" />
+    <mark>
+        <strong>
+            <span th:if="${#fields.hasErrors('username')}"
+                  th:errors="*{username}"></span>
+        </strong>
+    </mark>
+    <br/>
+    Password: <input type="password" placeholder="Password"
+                     th:field="*{password}" />
+    <mark>
+        <strong>
+            <span th:if="${#fields.hasErrors('password')}"
+                  th:errors="*{password}"></span>
+        </strong>
+    </mark>
+    <br/>
+    Job Title: <input type="text" th:field="*{jobTitle}" />
+    <br/>
+    Department:
+    <select class="form-control" th:field="*{department}">
+        <option th:each="department : ${departments}"
+                th:value="${department.id}"
+                th:text="${department.name}">
+        </option>
+    </select>
+
+    <br/>
+    Status:
+    <label class="radio-inline">
+        <input type="radio" th:field="*{enabled}" name="active" value=true checked>Currently Employeed
+    </label>
+    <label class="radio-inline">
+        <input type="radio" th:field="*{enabled}" name="active" value=false>No Longer Employeed
+    </label>
+
+    <br/>
+
+
+    <button type="submit" class="btn btn-info">Submit</button>
+</form>
+
+<div th:replace="base :: footerfg"></div>
+</body>
+</html>

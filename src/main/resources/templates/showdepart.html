@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <div th:replace="base :: headerfg"></div>
+</head>
+<body>
+<div th:replace="base :: navlinksfg"></div>
+<h2>All Employees in [[${department.name}]] Department</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Job Title</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="employee : ${department.employees}">
+            <td>[[${employee.lastName}]]</td>
+            <td>[[${employee.firstName}]]</td>
+            <td>[[${employee.jobTitle}]]</td>
+            <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/updateEmployee/{id}(id=${employee.id})}">Update</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<div th:replace="base :: footerfg"></div>
+</body>
+</html>

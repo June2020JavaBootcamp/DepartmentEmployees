@@ -7,24 +7,44 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommandLineRunnerBean implements CommandLineRunner {
     @Autowired
-    UserRepository userRepository;
+    EmployeeRepository employeeRepository;
 
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    DepartmentRepository departmentRepository;
+
     public void run(String... args) {
-        User user = new User("bart", "bart@domain.com", "bart",
+        Department department = new Department();
+        department.setName("HR");
+        departmentRepository.save(department);
+
+        Department department2 = new Department();
+        department2.setName("IT");
+        departmentRepository.save(department2);
+
+
+        Employee employee = new Employee("bart", "bart@domain.com", "bart",
                 "Bart", "Simpson", true);
         Role userRole = new Role("bart", "ROLE_USER");
-        userRepository.save(user);
+
+        employee.setDepartment(department);
+        employee.setJobTitle("Staff");
+        employeeRepository.save(employee);
         roleRepository.save(userRole);
 
-        User admin = new User("super", "super@domain.com", "super",
+        Employee admin = new Employee("super", "super@domain.com", "super",
                 "Super", "Hero", true);
         Role adminRole1 = new Role("super", "ROLE_ADMIN");
         Role adminRole2 = new Role("super", "ROLE_USER");
-        userRepository.save(admin);
+        admin.setDepartment(department);
+        admin.setJobTitle("Manager");
+
+        employeeRepository.save(admin);
         roleRepository.save(adminRole1);
         roleRepository.save(adminRole2);
+
+
     }
 }
